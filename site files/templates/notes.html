@@ -15,8 +15,8 @@
             <a href="{{url_for('new_note')}}">Add Note</a>
         </nav>
         <h1>Welcome Michael to the 49er notes app!</h1>
+        <h2>Use this site to maintain and organize your notes.</h2>
         <h1>Listing notes</h1>
-
         <table>
             <tr>
                 <th>Title</th>
@@ -26,6 +26,12 @@
                 <tr>
                     <td><a href="{{ url_for('get_note', note_id=note.id) }}">{{ note.title }}</a></td>
                     <td>{{ note.date }}</td>
+                    <td><a href="{{url_for('update_note', note_id=note.id)}}">Edit</a></td>
+                    <td>
+                        <form action="{{ url_for('delete_note', note_id=note.id) }}" method="POST">
+                            <input type="submit" value='Delete'>
+                        </form>
+                    </td>
                 </tr>
             {% endfor %}
         </table>

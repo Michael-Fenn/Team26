@@ -1,6 +1,6 @@
 from database import db
 
-class Note(db.Model):
+class Post(db.Model):
     id = db.Column("id", db.Integer, primary_key=True)
     title = db.Column("title", db.String(200))
     text = db.Column("text", db.String(100))

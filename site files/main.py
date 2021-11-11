@@ -7,7 +7,7 @@ from flask import render_template
 from flask import request
 from flask import redirect, url_for 
 from database import db
-from models import Note as Note
+from models import Post as Post
 from models import User as User
 app = Flask(__name__)     # create an app
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///flask_note_app.db'
@@ -18,70 +18,70 @@ db.init_app(app)
 with app.app_context():
     db.create_all()   # run under the app context
 
-#notes = {1:{'title': 'First note', 'text': 'This is my first note','date': '10-19-2021'},
-#    2:{'title': 'Second note', 'text': 'This is my second note','date': '10-19-2021'},
-#   3:{'title': 'Third note', 'text': ' This is my third note ','date': '10-19-2021'},
+#Posts = {1:{'title': 'First post', 'text': 'This is my first post','date': '10-19-2021'},
+#    2:{'title': 'Second post', 'text': 'This is my second post','date': '10-19-2021'},
+#   3:{'title': 'Third post', 'text': ' This is my third post','date': '10-19-2021'},
 #   }
 # @app.route is a decorator. It gives the function "index" special powers.
 # In this case it makes it so anyone going to "your-url/" makes this function
 # get called. What it returns is what is shown as the web page
 @app.route('/')
 def index():
-    a_user =  db.session.query(User).filter_by(email='mfenn2@uncc.edu').one()
-    return render_template('index.html', user = a_user)
-@app.route('/notes')
-def get_notes():
-    a_user = db.session.query(User).filter_by(email='mfenn2@uncc.edu').one()
-    my_notes = db.session.query(Note).all()
-    return render_template('notes.html', notes=my_notes, user=a_user)
-@app.route('/notes/<note_id>')
-def get_note(note_id):
-    a_user = db.session.query(User).filter_by(email='mfenn2@uncc.edu').one()
-    my_note = db.session.query(Note).filter_by(id=note_id).one()
-    return render_template('note.html', note=my_note)
-@app.route('/notes/new', methods=['GET', 'POST'])
-def new_note():
+    a_user =  db.session.query(User).filter_by(email='placeholder@uncc.edu').one()
+    return render_template('index.html')
+@app.route('/posts')
+def get_posts():
+    a_user = db.session.query(User).filter_by(email='placeholder@uncc.edu').one()
+    my_posts = db.session.query(Post).all()
+    return render_template('posts.html', posts=my_posts)
+@app.route('/posts/<post_id>')
+def get_post(post_id):
+    a_user = db.session.query(User).filter_by(email='placeholder@uncc.edu').one()
+    my_post = db.session.query(Post).filter_by(id=post_id).one()
+    return render_template('post.html', post=my_post)
+@app.route('/posts/new', methods=['GET', 'POST'])
+def new_post():
 
     print('request method is', request.method)
     if request.method == 'POST':
         #title data
         title = request.form['title']
         #note data
-        text = request.form['noteText']
+        text = request.form['postText']
         #date stamp
         from datetime import date
         today = date.today()
         #format date
         today = today.strftime("%m-%d-%Y")
-        new_record = Note(title, text, today)
+        new_record = Post(title, text, today)
         db.session.add(new_record)
         db.session.commit()
-        return redirect(url_for('get_notes'))
+        return redirect(url_for('get_posts'))
     else:
-        a_user = db.session.query(User).filter_by(email='mfenn2@uncc.edu').one()
+        a_user = db.session.query(User).filter_by(email='placeholder@uncc.edu').one()
         return render_template('new.html', user = a_user)
-@app.route('/notes/edit/<note_id>', methods=['GET', 'POST'])
-def update_note(note_id):
+@app.route('/posts/edit/<post_id>', methods=['GET', 'POST'])
+def update_post(post_id):
     if request.method == 'POST':
         title = request.form['title']
-        text = request.form['noteText']
-        note = db.session.query(Note).filter_by(id=note_id).one()
-        note.title = title
-        note.text = text
-        db.session.add(note)
+        text = request.form['postText']
+        post = db.session.query(Post).filter_by(id=post_id).one()
+        post.title = title
+        post.text = text
+        db.session.add(post)
         db.session.commit()
-        return redirect(url_for('get_notes'))
+        return redirect(url_for('get_posts'))
     else:
-        a_user = db.session.query(User).filter_by(email='mfenn2@uncc.edu').one()
-        my_note = db.session.query(Note).filter_by(id=note_id).one()
-        return render_template('new.html', note=my_note, user=a_user)
-@app.route('/notes/delete/<note_id>', methods=['POST'])
-def delete_note(note_id):
-    #retrieve the note from the db
-    my_note = db.session.query(Note).filter_by(id=note_id).one()
-    db.session.delete(my_note)
+        a_user = db.session.query(User).filter_by(email='placeholder@uncc.edu').one()
+        my_post = db.session.query(Post).filter_by(id=post_id).one()
+        return render_template('new.html', post=my_post, user=a_user)
+@app.route('/posts/delete/<post_id>', methods=['POST'])
+def delete_post(post_id):
+    #retrieve the post from the db
+    my_post = db.session.query(Post).filter_by(id=post_id).one()
+    db.session.delete(my_post)
     db.session.commit()
-    return redirect(url_for('get_notes'))
+    return redirect(url_for('get_posts'))
     
 app.run(host=os.getenv('IP', '127.0.0.1'),port=int(os.getenv('PORT', 5000)),debug=True)
 

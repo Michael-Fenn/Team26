@@ -14,7 +14,7 @@ import bcrypt
 from models import Comment as Comment
 from forms import RegisterForm, LoginForm, CommentForm
 app = Flask(__name__)     # create an app
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///main.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS']= False
 app.config['SECRET_KEY'] = 'SE3155'
 #  Bind SQLAlchemy db object to this Flask app

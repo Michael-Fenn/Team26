@@ -10,11 +10,24 @@
     </head>
     <body>
         <nav>
-            <a href="{{url_for('index')}}"> Home</a> ||
-            <a href="{{url_for('get_posts')}}"> My Posts</a> ||
-            <a href="{{url_for('new_post')}}">Add Post</a>
+            <nav>
+                <a href="{{ url_for('index') }}"> Home</a> ||
+                <a href="{{ url_for('get_posts') }}">Posts</a> ||
+                <a href="{{ url_for('new_post') }}">Add Post</a>
+            </nav>
+
+            {% if user %}
+                <nav>
+                    <a href="{{url_for('logout')}}">Logout</a>
+                </nav>
+            {% else %}
+                <nav>
+                    <a href="{{ url_for('login')}}">Sign In</a>||
+                    <a href="{{ url_for('register')}}">Register</a>
+                </nav>
+            {% endif %}
         </nav>
-        <h1>Welcome {{user.name}} to the 49er Posts App!</h1>
+        <h1>Welcome {% if user %}{{user}}{% endif %} to the 49er Posts App!</h1>
         <h2>Use this site to maintain and organize your posts.</h2>
         <nav> <a href="/posts"> My posts </a> </nav>
         <h3>Course posts</h3>

@@ -34,7 +34,7 @@
         {% if post %}
             <form action="{{ url_for('update_post', post_id=post.id)}}" method="post">
         {% else %}
-        <form action="new" method="post">
+        <form action="new" method="post" enctype="multipart/form-data">
         {% endif %}
            <p><label>Title </label></p>
            <p><input type="text" name="title" value="{% if post %}{{post.title}} {% endif %}"/></p>
@@ -46,6 +46,7 @@
                     Add your new post here ...
                 {% endif %}
             </textarea></p>
+            <input type="file" name="image" accept="image/*">
             <p>
                 {% if post %}
                     <input type="submit" value="Update Post"/>

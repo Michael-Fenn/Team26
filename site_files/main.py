@@ -11,6 +11,7 @@ from models import User as User
 from forms import RegisterForm
 from forms import LoginForm
 import bcrypt
+import base64
 from models import Comment as Comment
 from forms import RegisterForm, LoginForm, CommentForm
 app = Flask(__name__)     # create an app
@@ -54,12 +55,14 @@ def new_post():
             title = request.form['title']
             #post data
             text = request.form['postText']
+            #image data
+            image = base64.b64encode(request.files['image'].read())
             #date stamp
             from datetime import date
             today = date.today()
             #format date
             today = today.strftime("%m-%d-%Y")
-            new_record = Post(title, text, today, session['user_id'])
+            new_record = Post(title, text, image, today, session['user_id'])
             db.session.add(new_record)
             db.session.commit()
             return redirect(url_for('get_posts'))

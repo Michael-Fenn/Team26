@@ -9,3 +9,21 @@ h2{
     color:gold;
     background:green;
 }
+nav{
+    display: inline;
+}
+a{
+    text-decoration: none;
+}
+nav nav a{
+    display: block;
+    background: grey;
+    padding: 8px;
+    float: left;
+    text-decoration: none;
+    color: white;
+}
+nav nav a:hover{
+    background-color: green;
+    color: white;
+}

@@ -36,11 +36,17 @@
                 <th>Title</th>
                 <th>Text</th>
                 <th>Date</th>
+                {% if post.image %}
+                <th>Image</th>
+                {%endif%}
             </tr>
             <tr>
                 <td>{{ post.title }}</td>
                 <td>{{ post.text }}</td>
                 <td>{{ post.date }}</td>
+                {% if post.image %}
+                <td><img src="data:image/png;base64, {{ post.image.decode('utf-8') }}" width="200" height="auto"></td>
+                {%endif%}
             </tr>
         </table>
     </body>

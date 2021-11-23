@@ -76,9 +76,11 @@ def update_post(post_id):
         if request.method == 'POST':
             title = request.form['title']
             text = request.form['postText']
+            image = request.files['image'].read()
             post = db.session.query(Post).filter_by(id=post_id).one()
             post.title = title
             post.text = text
+            post.image = base64.b64encode(image)
             db.session.add(post)
             db.session.commit()
             return redirect(url_for('get_posts'))

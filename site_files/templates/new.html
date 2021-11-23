@@ -32,7 +32,7 @@
         <h1>Welcome {% if user %}{{user}}{% endif %} to the 49er Posts App!</h1>
         <h2>Use this site to maintain and organize your posts.</h2>
         {% if post %}
-            <form action="{{ url_for('update_post', post_id=post.id)}}" method="post">
+            <form action="{{ url_for('update_post', post_id=post.id)}}" method="post" enctype="multipart/form-data">
         {% else %}
         <form action="new" method="post" enctype="multipart/form-data">
         {% endif %}
@@ -46,7 +46,13 @@
                     Add your new post here ...
                 {% endif %}
             </textarea></p>
-            <input type="file" name="image" accept="image/*">
+            {%if post.image:%}
+                <p><label>Image </label></p>
+                <img src="data:image/png;base64, {{ post.image.decode('utf-8') }}" width="200" height="auto"><br>
+                <input type="file" name="image" accept="image/*">
+            {%else:%}
+                <input type="file" name="image" accept="image/*">
+            {%endif%}
             <p>
                 {% if post %}
                     <input type="submit" value="Update Post"/>

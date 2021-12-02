@@ -62,7 +62,7 @@ def new_post():
             today = date.today()
             #format date
             today = today.strftime("%m-%d-%Y")
-            new_record = Post(title, text, image, today, session['user_id'])
+            new_record = Post(title, text, image, today, session['user_id'], False)
             db.session.add(new_record)
             db.session.commit()
             return redirect(url_for('get_posts'))
@@ -102,6 +102,7 @@ def delete_post(post_id):
 def pin_post(post_id):
     if session.get('user'):
         my_post = db.session.query(Post).filter_by(id=post_id).one()
+        my_post.pin_status = True
         pin = db.session.query(Post).filter_by(pin_status="Pinned")
         db.session.commit()
         return redirect(url_for('get_posts'))

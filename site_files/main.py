@@ -81,7 +81,10 @@ def update_post(post_id):
             post.title = title
             post.text = text
             if post.image:
-                post.image = post.image
+                if request.form['rmvImg']:
+                    post.image = base64.b64encode(image)
+                else:
+                    post.image = post.image
             else:
                 post.image = base64.b64encode(image)
             db.session.add(post)

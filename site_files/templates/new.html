@@ -50,6 +50,8 @@
                 {%if post.image:%}
                     <p><label>Image </label></p>
                     <img src="data:image/png;base64, {{ post.image.decode('utf-8') }}" width="200" height="auto"><br>
+                    <input type="checkbox" id="rmvImg" name="rmvImg" value="remove">
+                    <label for="rmvImg"> Remove Image</label><br><br>
                 {%endif%}
                 <input type="file" name="image" accept="image/*">
             {%else:%}

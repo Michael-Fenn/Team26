@@ -46,9 +46,11 @@
                     Add your new post here ...
                 {% endif %}
             </textarea></p>
-            {%if post.image:%}
-                <p><label>Image </label></p>
-                <img src="data:image/png;base64, {{ post.image.decode('utf-8') }}" width="200" height="auto"><br>
+            {%if post:%}
+                {%if post.image:%}
+                    <p><label>Image </label></p>
+                    <img src="data:image/png;base64, {{ post.image.decode('utf-8') }}" width="200" height="auto"><br>
+                {%endif%}
                 <input type="file" name="image" accept="image/*">
             {%else:%}
                 <input type="file" name="image" accept="image/*">

@@ -80,7 +80,10 @@ def update_post(post_id):
             post = db.session.query(Post).filter_by(id=post_id).one()
             post.title = title
             post.text = text
-            post.image = base64.b64encode(image)
+            if post.image:
+                post.image = post.image
+            else:
+                post.image = base64.b64encode(image)
             db.session.add(post)
             db.session.commit()
             return redirect(url_for('get_posts'))

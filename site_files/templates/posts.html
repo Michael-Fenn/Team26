@@ -28,7 +28,7 @@
         </nav>
         <br>
         <h1>Welcome {% if user %}{{user}}{% endif %} to the 49er posts app!</h1>
-        <h2>Use this site to maintain and organize your posts.</h2>
+        <h2>A Forum For All of Your Needs.</h2>
         <h1>Listing posts</h1>
         <table>
             <tr>
@@ -43,6 +43,9 @@
                     <td>
                         <form action="{{ url_for('delete_post', post_id=post.id) }}" method="POST">
                             <input type="submit" value='Delete'>
+                        </form>
+                        <form action="{{  url_for('pin_post', post_id=post.id) }}" method="POST">
+                            <input type="submit" value="Pin Post">
                         </form>
                     </td>
                 </tr>

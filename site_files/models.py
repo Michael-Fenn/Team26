@@ -20,7 +20,8 @@ class Post(db.Model):
     image = db.Column("image", db.BLOB)
     date = db.Column("date", db.String(50))
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
-    comments = db.relationship("Comment", backref="post", cascade="all, delete-orphan", lazy=True)
+    pin_status = db.Column("Pin_Status", db.String(20))
+    comments = db.relationship("Comment", backref="post", cascade="all, delete-orphan", lazy=True) 
     def __init__(self, title, text, image, date, user_id):
         self.title = title
         self.text = text

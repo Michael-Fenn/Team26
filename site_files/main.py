@@ -98,6 +98,16 @@ def delete_post(post_id):
         return redirect(url_for('get_posts'))
     else:
         return redirect(url_for('login'))
+@app.route('/posts/pin/<post_id>', methods=['POST'])
+def pin_post(post_id):
+    if session.get('user'):
+        my_post = db.session.query(Post).filter_by(id=post_id).one()
+        pin = db.session.query(Post).filter_by(pin_status="Pinned")
+        db.session.commit()
+        return redirect(url_for('get_posts'))
+    else:
+        return redirect(url_for('login'))
+            
 @app.route('/register', methods=['POST', 'GET'])
 def register():
     form = RegisterForm()

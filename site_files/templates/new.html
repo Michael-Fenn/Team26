@@ -11,8 +11,8 @@
     <body>
        <nav>
         <nav>
-            <a href="{{ url_for('index') }}"> Home</a> ||
-            <a href="{{ url_for('get_posts') }}">Posts</a> ||
+            <a href="{{ url_for('index') }}"> Home</a> 
+            <a href="{{ url_for('get_posts') }}">Posts</a> 
             <a href="{{ url_for('new_post') }}">Add Post</a>
         </nav>
 
@@ -22,30 +22,24 @@
             </nav>
         {% else %}
             <nav>
-                <a href="{{ url_for('login')}}">Sign In</a>||
+                <a href="{{ url_for('login')}}">Sign In</a>
                 <a href="{{ url_for('register')}}">Register</a>
             </nav>
         {% endif %}
 
        </nav>
-
+       <br>
         <h1>Welcome {% if user %}{{user}}{% endif %} to the 49er Posts App!</h1>
-        <h2>Use this site to maintain and organize your posts.</h2>
+        <h2>A Forum For All of Your Needs.</h2>
         {% if post %}
             <form action="{{ url_for('update_post', post_id=post.id)}}" method="post">
         {% else %}
         <form action="new" method="post" enctype="multipart/form-data">
         {% endif %}
            <p><label>Title </label></p>
-           <p><input type="text" name="title" value="{% if post %}{{post.title}} {% endif %}"/></p>
-            <p><label>Post </label></p>
-            <p><textarea name="postText"  rows="6" cols="0" >
-                {% if post %}
-                    {{post.text}}
-                {% else %}
-                    Add your new post here ...
-                {% endif %}
-            </textarea></p>
+           <p><input type="text" name="title" value="{% if post %}{{post.title}} {% endif %}" placeholder="Add a title" required/></p>
+            <p><label>Description </label></p>
+            <p><textarea name="postText"  rows="6" cols="0" placeholder="Add a description to your post" required></textarea></p>
             <input type="file" name="image" accept="image/*">
             <p>
                 {% if post %}

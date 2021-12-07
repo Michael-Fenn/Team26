@@ -5,16 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="UNCC Posts App">
 
-        <div class="dropdown">
-        <button class="dropbtn">Dropdown</button>
-            <div class="dropdown-content">
-            <a href="#">classes_posts</a>
-            <a href="#">extracurriculars_posts</a>
-            <a href="#">majors_posts</a>
-                <a href="#">food_posts</a>
-                <a href="#">admissions_posts</a>
-            </div>
-        </div>
+
 
 
         <title>UNCC Posts App - New Note</title>
@@ -24,16 +15,42 @@
     <body>
        <nav>
            <!--  add navigation links -->
+           <a href="{{url_for('index')}}"> Home</a> ||
+            <a href="{{url_for('get_posts')}}">Posts</a> ||
+            <a href="{{url_for('new_post')}}">Add Post</a>
+            <a href = "{{ url_for('get_categories') }}">Categories</a>
+            {% if user %}
+                <nav>
+                    <a href="{{url_for('logout')}}">Logout</a>
+                </nav>
+            {% else %}
+                <nav>
+                    <a href="{{ url_for('login')}}">Sign In</a>||
+                    <a href="{{ url_for('register')}}">Register</a>
+                </nav>
+            {% endif %}
 
        </nav>
 
-        <h1>Welcome {{user.name}} to the 49er Posts App!</h1>
+        <h1>Welcome {% if user %}{{user}}{% endif %} to the 49er Forum!</h1>
         <h2>Use this site to maintain and organize your posts.</h2>
         {% if post %}
             <form action="{{ url_for('update_post', post_id=post.id)}}" method="post">
         {% else %}
         <form action="new" method="post">
         {% endif %}
+<!--           <label for="category">Choose a category name:</label>-->
+<!--            <select name="category" id="category">-->
+<!--                <option value="major_posts">Major</option>-->
+<!--                <option value="classes_posts">Classes</option>-->
+<!--                <option value="food_posts">Food</option>-->
+<!--                <option value="extracurriculars_posts">Extracurriculars</option>-->
+<!--                <option value="admissions_posts">Admissions</option>-->
+<!--            </select>-->
+
+            <p><label>Category </label></p>
+           <p><input type="text" name="category"/></p>
+
            <p><label>Title </label></p>
            <p><input type="text" name="title" value="{% if post %}{{post.title}} {% endif %}"/></p>
             <p><label>Post </label></p>
@@ -52,5 +69,6 @@
                 {% endif %}
             </p>
         </form>
+            </form>
     </body>
 </html>

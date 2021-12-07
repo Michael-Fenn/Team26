@@ -1,6 +1,7 @@
 from database import db
 import datetime
 
+
 class Comment(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     date_posted = db.Column(db.DateTime, nullable=False)
@@ -13,18 +14,25 @@ class Comment(db.Model):
         self.content = content
         self.post_id = note_id
         self.user_id = user_id
+
+
 class Post(db.Model):
     id = db.Column("id", db.Integer, primary_key=True)
     title = db.Column("title", db.String(200))
     text = db.Column("text", db.String(100))
     date = db.Column("date", db.String(50))
+    category = db.column("major", db.String(100))
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
     comments = db.relationship("Comment", backref="post", cascade="all, delete-orphan", lazy=True)
-    def __init__(self, title, text, date, user_id):
+
+    def __init__(self, title, text, date, category, user_id):
         self.title = title
         self.text = text
         self.date = date
         self.user_id = user_id
+        self.category = category
+
+
 class User(db.Model):
     id = db.Column("id", db.Integer, primary_key=True)
     first_name = db.Column("first_name", db.String(100))

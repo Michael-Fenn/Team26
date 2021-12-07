@@ -13,7 +13,10 @@
         <a href="{{url_for('get_posts')}}"> My Posts</a> ||
         <a href="{{url_for('new_post')}}">Add Post</a>
         <a href = "{{ url_for('get_categories') }}">Categories</a>
-        {% if user %}
+
+
+    </nav>
+    {% if user %}
                 <nav>
                     <a href="{{url_for('logout')}}">Logout</a>
                 </nav>
@@ -27,22 +30,41 @@
     <body>
         <h1>Welcome {% if user %}{{user}}{% endif %} to the 49er Forum!</h1>
         <h2>Use this site to maintain and organize your posts.</h2>
-        <h1>Post details</h1>
 
-        <table>
-            <tr>
-                <th>Title</th>
-                <th>Category</th>
-                <th>Text</th>
-                <th>Date</th>
 
-            </tr>
-            <tr>
-                <td>{{ post.title }}</td>
-                <td>{{ post.category }}</td>
-                <td>{{ post.text }}</td>
-                <td>{{ post.date }}</td>
-            </tr>
-        </table>
+    <div  class = 'Category_majors'>
+        <a href = "{{ url_for('get_major_posts') }}">Majors</a>
+    </div>
+
+    <div  class = 'Category_classes'>
+        <a href = "{{ url_for('get_classes') }}">Classes</a>
+    </div>
+
+    <div  class = 'Category_food'>
+        <a href = "{{ url_for('get_food') }}">Food</a>
+    </div>
+
+    <div  class = 'Category_extracurriculars'>
+        <a href = "{{ url_for('get_extracurriculars') }}">Extracurriculars</a>
+    </div>
+
+    <div  class = 'Category_admissions'>
+        <a href = "{{ url_for('get_admissions') }}">Admissions</a>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     </body>
 </html>

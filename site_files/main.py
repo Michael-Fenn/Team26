@@ -8,8 +8,6 @@ from flask import session
 from database import db
 from models import Post as Post
 from models import User as User
-from forms import RegisterForm
-from forms import LoginForm
 import bcrypt
 from models import Comment as Comment
 from forms import RegisterForm, LoginForm, CommentForm
@@ -27,7 +25,8 @@ with app.app_context():
 def index():
     if session.get('user'):
         return render_template('index.html', user = session['user'])
-    return render_template("index.html")
+    return render_template("index.html", user = 'new user')
+
     
 @app.route('/posts')
 def get_posts():
@@ -52,6 +51,7 @@ def new_post():
         if request.method == 'POST':
             #title data
             title = request.form['title']
+            category = request.form['category']
             #post data
             text = request.form['postText']
             #date stamp
@@ -59,7 +59,7 @@ def new_post():
             today = date.today()
             #format date
             today = today.strftime("%m-%d-%Y")
-            new_record = Post(title, text, today, session['user_id'])
+            new_record = Post(title, category, text, today, session['user_id'])
             db.session.add(new_record)
             db.session.commit()
             return redirect(url_for('get_posts'))
@@ -80,7 +80,7 @@ def update_post(post_id):
             db.session.commit()
             return redirect(url_for('get_posts'))
         else:
-            a_user = db.session.query(User).filter_by(email='mfenn2@uncc.edu').one()
+            #a_user = db.session.query(User).filter_by(email='mfenn2@uncc.edu').one()
             my_post = db.session.query(Post).filter_by(id=post_id).one()
             return render_template('new.html', post=my_post, user=session['user'])
     else:
@@ -165,7 +165,71 @@ def new_comment(post_id):
 
     else:
         return redirect(url_for('login'))
+
+
+# CATEGORIES PATHWAYS
+@app.route('/posts/categories')
+def get_categories():
+    #retrieve user from db
+    if session.get('user'):
+        #my_posts = db.session.query(Post).filter_by(user_id=session['user_id']).all()
+        return render_template('categories.html', user=session['user'])
+    else:
+        return redirect(url_for('login'))
+
+# posts=my_posts,
+# THESE ARE THE SUB TOPICS FOR CATEGORIES
+@app.route('/posts/categories/major_posts')
+def get_major_posts():
+    #retrieve user from db
+    if session.get('user'):
+        my_posts = db.session.query(Post).filter_by(user_id=session['user_id']).all()
+        return render_template('majors_posts.html', posts=my_posts, user=session['user'])
+    else:
+        return redirect(url_for('login'))
+
+@app.route('/posts/categories/classes')
+def get_classes():
+    #retrieve user from db
+    if session.get('user'):
+        my_posts = db.session.query(Post).filter_by(user_id=session['user_id']).all()
+        return render_template('classes_posts.html', posts=my_posts, user=session['user'])
+    else:
+        return redirect(url_for('login'))
+
+
+@app.route('/posts/categories/food')
+def get_food():
+    #retrieve user from db
+    if session.get('user'):
+        my_posts = db.session.query(Post).filter_by(user_id=session['user_id']).all()
+        return render_template('food_posts.html', posts=my_posts, user=session['user'])
+    else:
+        return redirect(url_for('login'))
+
+@app.route('/posts/categories/extracurriculars')
+def get_extracurriculars():
+    #retrieve user from db
+    if session.get('user'):
+        my_posts = db.session.query(Post).filter_by(user_id=session['user_id']).all()
+        return render_template('extracurriculars_posts.html', posts=my_posts, user=session['user'])
+    else:
+        return redirect(url_for('login'))
+
+
+@app.route('/posts/categories/admissions')
+def get_admissions():
+    #retrieve user from db
+    if session.get('user'):
+        my_posts = db.session.query(Post).filter_by(user_id=session['user_id']).all()
+        return render_template('admissions_posts.html', posts=my_posts, user=session['user'])
+    else:
+        return redirect(url_for('login'))
+
+
 app.run(host=os.getenv('IP', '127.0.0.1'),port=int(os.getenv('PORT', 5000)),debug=True)
+
+
 
 # To see the web page in your web browser, go to the url,
 #   http://127.0.0.1:5000

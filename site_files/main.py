@@ -103,7 +103,7 @@ def pin_post(post_id):
     if session.get('user'):
         my_post = db.session.query(Post).filter_by(id=post_id).one()
         my_post.pin_status = True
-        pin = db.session.query(Post).filter_by(pin_status="Pinned")
+        pin = db.session.query(Post).filter_by(pin_status=True)
         db.session.commit()
         return redirect(url_for('get_posts'))
     else:

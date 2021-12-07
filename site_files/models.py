@@ -21,9 +21,10 @@ class Post(db.Model):
     title = db.Column("title", db.String(200))
     text = db.Column("text", db.String(100))
     date = db.Column("date", db.String(50))
-    category = db.column("major", db.String(100))
+    category = db.column("category", db.String(100))
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
     comments = db.relationship("Comment", backref="post", cascade="all, delete-orphan", lazy=True)
+   
 
     def __init__(self, title, text, date, category, user_id):
         self.title = title

@@ -35,6 +35,7 @@ def get_posts():
     #retrieve user from db
     if session.get('user'):
         my_posts = db.session.query(Post).filter_by(user_id=session['user_id']).all()
+        
         return render_template('posts.html', posts=my_posts, user=session['user'])
     else:
         return redirect(url_for('login'))

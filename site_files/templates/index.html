@@ -16,7 +16,7 @@
             </a>
         </h1>
         <!--<h1>Welcome {% if user %}{{user}}{% endif %} to 49er Forum!</h1>-->
-        <nav>
+        <nav id='navbar'>
             <nav>
                 <a href="{{ url_for('index') }}"> Home</a>
                 <a href="{{ url_for('get_posts') }}">Posts</a>
@@ -33,7 +33,7 @@
                     <a href="{{ url_for('register')}}">Register</a>
                 </nav>
             {% endif %}
-        </nav><br>
+        </nav>
         <h2>A Forum For All of Your UNCC Needs.</h2>
         <nav> <a href="/posts"> My posts </a> </nav>
       

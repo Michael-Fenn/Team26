@@ -10,18 +10,27 @@ h2{
     background:green;
 }
 nav{
-    display: inline;
+    display: block;
+    padding: none;
+    margin: none;
+}
+#navbar{
+    background-color: grey;
+    overflow: hidden;
+    padding: none;
+    margin: none;
 }
 a{
     text-decoration: none;
 }
 nav nav a{
-    display: block;
+    display: inline;
     background: grey;
     padding: 8px;
     float: left;
     text-decoration: none;
     color: white;
+
 }
 nav nav a:hover{
     background-color: green;

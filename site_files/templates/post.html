@@ -13,7 +13,7 @@
             <img src="{{ url_for('static', filename='49erforum.png') }}" alt="49er forum logo" width="100px" height="62px">
         </a>
     </h1>
-    <nav>
+    <nav id='navbar'>
         <nav>
             <a href="{{url_for('index')}}"> Home</a> 
             <a href="{{url_for('get_posts')}}"> My Posts</a> 
@@ -30,7 +30,6 @@
             </nav>
         {% endif %}
     </nav>
-    <br>
     <body>
        
         <h2>A Forum For All of Your UNCC Needs.</h2>

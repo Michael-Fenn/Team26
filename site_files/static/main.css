@@ -1,6 +1,6 @@
 
 body {
-    padding: 30px 30px;
+    padding: none;
     }
 h1{
     color:green;
@@ -8,6 +8,8 @@ h1{
 h2{
     color:gold;
     background:green;
+    padding: none;
+    margin: none;
 }
 nav{
     display: block;
@@ -39,6 +41,16 @@ nav nav a:hover{
 textarea{
     resize: none;
 
+}
+input[type=submit]{
+    display:block;
+    background: grey;
+    padding: 8px;
+    text-decoration: none;
+    color: white;
+}
+form{
+    display: inline-block;
 }
 html, body {
     margin: 0;

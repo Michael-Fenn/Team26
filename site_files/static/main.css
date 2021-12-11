@@ -56,3 +56,11 @@ html, body {
     margin: 0;
     padding: 0;
  }
+ #home_image{
+     padding: none;
+     display: block;
+     margin-left: auto;
+     margin-right: auto;
+     height: 25%;
+     width: 100%;
+ }

@@ -42,7 +42,7 @@
            <p><label>Title </label></p>
            <p><input type="text" name="title" value="{% if post %}{{post.title}} {% endif %}" placeholder="Add a title" required/></p>
             <p><label>Description </label></p>
-            <p><textarea name="postText"  rows="6" cols="0" placeholder="Add a description to your post" required></textarea></p>
+            <p><textarea name="postText"  rows="6" cols="0" placeholder="Add a description to your post" required>{% if post %}{{post.text}}{% endif %}</textarea></p>
             <input type="file" name="image" accept="image/*">
             <p>
                 {% if post %}

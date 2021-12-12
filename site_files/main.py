@@ -84,7 +84,6 @@ def update_post(post_id):
             db.session.commit()
             return redirect(url_for('get_posts'))
         else:
-            a_user = db.session.query(User).filter_by(email='mfenn2@uncc.edu').one()
             my_post = db.session.query(Post).filter_by(id=post_id).one()
             return render_template('new.html', post=my_post, user=session['user'])
     else:
@@ -102,9 +101,11 @@ def delete_post(post_id):
 @app.route('/posts/pin/<post_id>', methods=['POST'])
 def pin_post(post_id):
     if session.get('user'):
+        pin_index = db.session.query(Post).first().id
         my_post = db.session.query(Post).filter_by(id=post_id).one()
         my_post.pin_status = True
-        pin = db.session.query(Post).filter_by(pin_status=True)
+        my_post.id = pin_index - 1
+        #pin = db.session.query(Post).filter_by(pin_status=True)
         db.session.commit()
         return redirect(url_for('get_posts'))
     else:

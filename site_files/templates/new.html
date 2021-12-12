@@ -35,7 +35,7 @@
        </nav>
        <h2>A Forum For All of Your UNCC Needs.</h2>
         {% if post %}
-            <form action="{{ url_for('update_post', post_id=post.id)}}" method="post">
+            <form action="{{ url_for('update_post', post_id=post.id)}}" method="post" enctype="multipart/form-data">
         {% else %}
         <form action="new" method="post" enctype="multipart/form-data">
         {% endif %}
@@ -43,7 +43,17 @@
            <p><input type="text" name="title" value="{% if post %}{{post.title}} {% endif %}" placeholder="Add a title" required/></p>
             <p><label>Description </label></p>
             <p><textarea name="postText"  rows="6" cols="0" placeholder="Add a description to your post" required>{% if post %}{{post.text}}{% endif %}</textarea></p>
-            <input type="file" name="image" accept="image/*">
+            {%if post:%}
+                {%if post.image:%}
+                    <p><label>Image </label></p>
+                    <img src="data:image/png;base64, {{ post.image.decode('utf-8') }}" width="200" height="auto"><br>
+                    <input type="checkbox" id="rmvImg" name="rmvImg" value="remove">
+                    <label for="rmvImg"> Remove Image</label><br><br>
+                {%endif%}
+                <input type="file" name="image" accept="image/*">
+            {%else:%}
+                <input type="file" name="image" accept="image/*">
+            {%endif%}
             <p>
                 {% if post %}
                     <input type="submit" value="Update Post"/>

@@ -35,6 +35,7 @@ def get_posts():
     #retrieve user from db
     if session.get('user'):
         my_posts = db.session.query(Post).filter_by(user_id=session['user_id']).all()
+        
         return render_template('posts.html', posts=my_posts, user=session['user'])
     else:
         return redirect(url_for('login'))
@@ -62,7 +63,7 @@ def new_post():
             today = date.today()
             #format date
             today = today.strftime("%m-%d-%Y")
-            new_record = Post(title, text, image, today, session['user_id'])
+            new_record = Post(title, text, image, today, session['user_id'], False)
             db.session.add(new_record)
             db.session.commit()
             return redirect(url_for('get_posts'))
@@ -83,7 +84,6 @@ def update_post(post_id):
             db.session.commit()
             return redirect(url_for('get_posts'))
         else:
-            a_user = db.session.query(User).filter_by(email='mfenn2@uncc.edu').one()
             my_post = db.session.query(Post).filter_by(id=post_id).one()
             return render_template('new.html', post=my_post, user=session['user'])
     else:
@@ -98,6 +98,19 @@ def delete_post(post_id):
         return redirect(url_for('get_posts'))
     else:
         return redirect(url_for('login'))
+@app.route('/posts/pin/<post_id>', methods=['POST'])
+def pin_post(post_id):
+    if session.get('user'):
+        pin_index = db.session.query(Post).first().id
+        my_post = db.session.query(Post).filter_by(id=post_id).one()
+        my_post.pin_status = True
+        my_post.id = pin_index - 1
+        #pin = db.session.query(Post).filter_by(pin_status=True)
+        db.session.commit()
+        return redirect(url_for('get_posts'))
+    else:
+        return redirect(url_for('login'))
+            
 @app.route('/register', methods=['POST', 'GET'])
 def register():
     form = RegisterForm()

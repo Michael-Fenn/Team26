@@ -1,6 +1,6 @@
 
 body {
-    padding: 30px 30px;
+    padding: none;
     }
 h1{
     color:green;
@@ -8,22 +8,59 @@ h1{
 h2{
     color:gold;
     background:green;
+    padding: none;
+    margin: none;
 }
 nav{
-    display: inline;
+    display: block;
+    padding: none;
+    margin: none;
+}
+#navbar{
+    background-color: grey;
+    overflow: hidden;
+    padding: none;
+    margin: none;
 }
 a{
     text-decoration: none;
 }
 nav nav a{
-    display: block;
+    display: inline;
     background: grey;
     padding: 8px;
     float: left;
     text-decoration: none;
     color: white;
+
 }
 nav nav a:hover{
     background-color: green;
     color: white;
 }
+textarea{
+    resize: none;
+
+}
+input[type=submit]{
+    display:block;
+    background: grey;
+    padding: 8px;
+    text-decoration: none;
+    color: white;
+}
+form{
+    display: inline-block;
+}
+html, body {
+    margin: 0;
+    padding: 0;
+ }
+ #home_image{
+     padding: none;
+     display: block;
+     margin-left: auto;
+     margin-right: auto;
+     height: 25%;
+     width: 100%;
+ }

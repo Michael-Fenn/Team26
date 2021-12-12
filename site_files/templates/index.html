@@ -8,8 +8,15 @@
         <!-- styles -->
         <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
     </head>
+    
     <body>
-        <nav>
+        <h1>
+            <a href="{{ url_for('index') }}">
+                <img src="{{ url_for('static', filename='49erforum.png') }}" alt="49er forum logo" width="100px" height="62px">
+            </a>
+        </h1>
+        <!--<h1>Welcome {% if user %}{{user}}{% endif %} to 49er Forum!</h1>-->
+        <nav id='navbar'>
             <nav>
                 <a href="{{ url_for('index') }}"> Home</a>
                 <a href="{{ url_for('get_posts') }}">Posts</a>
@@ -27,15 +34,10 @@
                 </nav>
             {% endif %}
         </nav>
-        <br>
-        <h1>Welcome {% if user %}{{user}}{% endif %} to the 49er Posts App!</h1>
-        <h2>Use this site to maintain and organize your posts.</h2>
+        <h2>A Forum For All of Your UNCC Needs.</h2>
+        <img src="{{ url_for('static', filename='uncc_campus.jpg') }}" alt='Student Union' id="home_image">
         <nav> <a href="/posts"> My posts </a> </nav>
-        <h3>Course posts</h3>
-
-        <h3>To Do</h3>
-
-        <h3>Work posts</h3>
+      
 
     </body>
 </html>

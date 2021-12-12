@@ -1,84 +1,92 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='forms.css') }}">
 </head>
-    <body>
-        <div class="navdiv">
 
+<body>
+    <h1>
+        <a href="{{ url_for('index') }}">
+            <img src="{{ url_for('static', filename='49erforum.png') }}" alt="49er forum logo" width="100px"
+                height="62px">
+        </a>
+    </h1>
+    <div class="navdiv">
+        <nav id='navbar'>
             <nav>
-                <a href="{{ url_for('index') }}"> Home</a> ||
-                <a href="{{ url_for('get_posts') }}"> Posts</a> ||
+                <a href="{{ url_for('index') }}"> Home</a>
+                <a href="{{ url_for('get_posts') }}"> Posts</a>
                 <a href="{{ url_for('new_post') }}">Add Post</a>
             </nav>
             {% if user %}
-                <nav>
-                    <a href="{{url_for('logout')}}">Logout</a>
-                </nav>
+            <nav>
+                <a href="{{url_for('logout')}}">Logout</a>
+            </nav>
             {% else %}
-                <nav>
-                    <a href="{{ url_for('login')}}">Sign In</a>||
-                    <a href="{{ url_for('register')}}">Register</a>
-                </nav>
+            <nav>
+                <a href="{{ url_for('login')}}">Sign In</a>
+                <a href="{{ url_for('register')}}">Register</a>
+            </nav>
             {% endif %}
-        </div>
-        <h1>Welcome {% if user %}{{user}}{% endif %}to the 49er Forum!</h1>
+        </nav>
+    </div>
+    <h2>A Forum For All of Your UNCC Needs.</h2>
+    <div class="formwrapper">
+        <h2 class="title">Register</h2>
+        <form method="POST" action="/register">
+            <div class="form-field">{{ form.firstname.label }} {{ form.firstname }}
+                {% if form.firstname.errors %}
+                <ul class="errors">
+                    {% for error in form.firstname.errors %}
+                    <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+            </div>
+            <div class="form-field">{{ form.lastname.label }} {{ form.lastname }}
+                {% if form.lastname.errors %}
+                <ul class="errors">
+                    {% for error in form.lastname.errors %}
+                    <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+            </div>
+            <div class="form-field">{{ form.email.label }} {{ form.email }}
+                {% if form.email.errors %}
+                <ul class="errors">
+                    {% for error in form.email.errors %}
+                    <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+            </div>
+            <div class="form-field">{{ form.password.label }} {{ form.password }}
+                {% if form.password.errors %}
+                <ul class="errors">
+                    {% for error in form.password.errors %}
+                    <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+            </div>
+            <div class="form-field">{{ form.confirmPassword.label }} {{ form.confirmPassword }}
+                {% if form.confirmPassword.errors %}
+                <ul class="errors">
+                    {% for error in form.confirmPassword.errors %}
+                    <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+            </div>
+            {{ form.submit }}
+        </form>
 
-        <h2>Use this site to maintain and organize your notes.</h2>
-        <div class="formwrapper">
-            <h2 class="title">Register</h2>
-            <form method="POST" action="/register">
-                <div class="form-field">{{ form.firstname.label }} {{ form.firstname }}
-                    {% if form.firstname.errors %}
-                    <ul class="errors">
-                        {% for error in form.firstname.errors %}
-                        <li>{{ error }}</li>
-                        {% endfor %}
-                    </ul>
-                    {% endif %}
-                </div>
-                <div class="form-field">{{ form.lastname.label }} {{ form.lastname }}
-                    {% if form.lastname.errors %}
-                    <ul class="errors">
-                        {% for error in form.lastname.errors %}
-                        <li>{{ error }}</li>
-                        {% endfor %}
-                    </ul>
-                    {% endif %}
-                </div>
-                <div class="form-field">{{ form.email.label }} {{ form.email }}
-                    {% if form.email.errors %}
-                    <ul class="errors">
-                        {% for error in form.email.errors %}
-                        <li>{{ error }}</li>
-                        {% endfor %}
-                    </ul>
-                    {% endif %}
-                </div>
-                <div class="form-field">{{ form.password.label }} {{ form.password }}
-                    {% if form.password.errors %}
-                    <ul class="errors">
-                        {% for error in form.password.errors %}
-                        <li>{{ error }}</li>
-                        {% endfor %}
-                    </ul>
-                    {% endif %}
-                </div>
-                <div class="form-field">{{ form.confirmPassword.label }} {{ form.confirmPassword }}
-                    {% if form.confirmPassword.errors %}
-                    <ul class="errors">
-                        {% for error in form.confirmPassword.errors %}
-                        <li>{{ error }}</li>
-                        {% endfor %}
-                    </ul>
-                    {% endif %}
-                </div>
-                {{ form.submit }}
-            </form>
+    </div>
+</body>
 
-        </div>
-    </body>
 </html>

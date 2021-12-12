@@ -30,8 +30,9 @@ class Post(db.Model):
         self.title = title
         self.text = text
         self.date = date
-        self.user_id = user_id
         self.category = category
+        self.user_id = user_id
+        
 
 
 class User(db.Model):

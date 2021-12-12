@@ -59,7 +59,7 @@ def new_post():
             today = date.today()
             #format date
             today = today.strftime("%m-%d-%Y")
-            new_record = Post(title, category, text, today, session['user_id'])
+            new_record = Post(title, text, today, category, session['user_id'])
             db.session.add(new_record)
             db.session.commit()
             return redirect(url_for('get_posts'))
@@ -168,14 +168,14 @@ def new_comment(post_id):
 
 
 # CATEGORIES PATHWAYS
-@app.route('/posts/categories')
-def get_categories():
+# @app.route('/posts/categories')
+#def get_categories():
     #retrieve user from db
-    if session.get('user'):
+   # if session.get('user'):
         #my_posts = db.session.query(Post).filter_by(user_id=session['user_id']).all()
-        return render_template('categories.html', user=session['user'])
-    else:
-        return redirect(url_for('login'))
+       # return render_template('categories.html', user=session['user'])
+   # else:
+     #   return redirect(url_for('login')) 
 
 # posts=my_posts,
 # THESE ARE THE SUB TOPICS FOR CATEGORIES
@@ -183,7 +183,7 @@ def get_categories():
 def get_major_posts():
     #retrieve user from db
     if session.get('user'):
-        my_posts = db.session.query(Post).filter_by(user_id=session['user_id']).all()
+        my_posts = db.session.query(Post).filter_by(user_id=session['user_id'], category="majors").all()
         return render_template('majors_posts.html', posts=my_posts, user=session['user'])
     else:
         return redirect(url_for('login'))
@@ -192,7 +192,7 @@ def get_major_posts():
 def get_classes():
     #retrieve user from db
     if session.get('user'):
-        my_posts = db.session.query(Post).filter_by(user_id=session['user_id']).all()
+        my_posts = db.session.query(Post).filter_by(user_id=session['user_id'], category="classes").all()
         return render_template('classes_posts.html', posts=my_posts, user=session['user'])
     else:
         return redirect(url_for('login'))
@@ -202,7 +202,7 @@ def get_classes():
 def get_food():
     #retrieve user from db
     if session.get('user'):
-        my_posts = db.session.query(Post).filter_by(user_id=session['user_id']).all()
+        my_posts = db.session.query(Post).filter_by(user_id=session['user_id'], category="food").all()
         return render_template('food_posts.html', posts=my_posts, user=session['user'])
     else:
         return redirect(url_for('login'))
@@ -211,7 +211,7 @@ def get_food():
 def get_extracurriculars():
     #retrieve user from db
     if session.get('user'):
-        my_posts = db.session.query(Post).filter_by(user_id=session['user_id']).all()
+        my_posts = db.session.query(Post).filter_by(user_id=session['user_id'], category="extracurriculars").all()
         return render_template('extracurriculars_posts.html', posts=my_posts, user=session['user'])
     else:
         return redirect(url_for('login'))

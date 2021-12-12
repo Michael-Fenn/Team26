@@ -13,7 +13,6 @@
             <a href="{{url_for('index')}}"> Home</a> ||
             <a href="{{url_for('get_posts')}}">Posts</a> ||
             <a href="{{url_for('new_post')}}">Add Post</a>
-            <a href = "{{ url_for('get_categories') }}">Categories</a>
             {% if user %}
                 <nav>
                     <a href="{{url_for('logout')}}">Logout</a>
@@ -27,6 +26,14 @@
         </nav>
         <h1>Welcome {% if user %}{{user}}{% endif %} to the 49er Forum!</h1>
         <h2>Use this site to maintain and organize your posts.</h2>
+        <nav>
+            <a href="{{url_for('get_major_posts')}}">Majors</a>
+            <a href="{{url_for('get_classes')}}">Classes</a>
+            <a href="{{url_for('get_food')}}">Food</a>
+            <a href="{{url_for('get_extracurriculars')}}">Extracurriculars</a>
+            <a href="{{url_for('get_admissions')}}">Admissions</a>
+
+        </nav>
         <h1>Listing posts</h1>
         <table>
             <tr>

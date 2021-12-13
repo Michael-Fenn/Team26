@@ -38,6 +38,7 @@
         <table>
             <tr>
                 <th>Title</th>
+                <th>Category</th>
                 <th>Text</th>
                 <th>Date</th>
                 {% if post.image %}
@@ -46,6 +47,7 @@
             </tr>
             <tr>
                 <td>{{ post.title }}</td>
+                <td>{{ post.category }}</td>
                 <td>{{ post.text }}</td>
                 <td>{{ post.date }}</td>
                 {% if post.image %}

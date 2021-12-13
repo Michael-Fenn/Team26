@@ -19,14 +19,16 @@ class Post(db.Model):
     text = db.Column("text", db.String(100))
     image = db.Column("image", db.BLOB)
     date = db.Column("date", db.String(50))
+    category = db.Column("category", db.String(100))
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
     pin_status = db.Column("Pin_Status", db.Boolean)
     comments = db.relationship("Comment", backref="post", cascade="all, delete-orphan", lazy=True) 
-    def __init__(self, title, text, image, date, user_id, pin_status):
+    def __init__(self, title, text, image, date, category, user_id, pin_status):
         self.title = title
         self.text = text
         self.image = image
         self.date = date
+        self.category = category
         self.user_id = user_id
         self.pin_status = pin_status
 class User(db.Model):

@@ -54,6 +54,7 @@ def new_post():
         if request.method == 'POST':
             #title data
             title = request.form['title']
+            category = request.form['category']
             #post data
             text = request.form['postText']
             #image data
@@ -63,7 +64,7 @@ def new_post():
             today = date.today()
             #format date
             today = today.strftime("%m-%d-%Y")
-            new_record = Post(title, text, image, today, session['user_id'], False)
+            new_record = Post(title, text, image, today, category, session['user_id'], False)
             db.session.add(new_record)
             db.session.commit()
             return redirect(url_for('get_posts'))
@@ -189,6 +190,55 @@ def new_comment(post_id):
 
     else:
         return redirect(url_for('login'))
+
+# THESE ARE THE SUB TOPICS FOR CATEGORIES
+@app.route('/posts/categories/major_posts')
+def get_major_posts():
+    #retrieve user from db
+    if session.get('user'):
+        my_posts = db.session.query(Post).filter_by(user_id=session['user_id'], category="majors").all()
+        return render_template('majors_posts.html', posts=my_posts, user=session['user'])
+    else:
+        return redirect(url_for('login'))
+
+@app.route('/posts/categories/classes')
+def get_classes():
+    #retrieve user from db
+    if session.get('user'):
+        my_posts = db.session.query(Post).filter_by(user_id=session['user_id'], category="classes").all()
+        return render_template('classes_posts.html', posts=my_posts, user=session['user'])
+    else:
+        return redirect(url_for('login'))
+
+
+@app.route('/posts/categories/food')
+def get_food():
+    #retrieve user from db
+    if session.get('user'):
+        my_posts = db.session.query(Post).filter_by(user_id=session['user_id'], category="food").all()
+        return render_template('food_posts.html', posts=my_posts, user=session['user'])
+    else:
+        return redirect(url_for('login'))
+
+@app.route('/posts/categories/extracurriculars')
+def get_extracurriculars():
+    #retrieve user from db
+    if session.get('user'):
+        my_posts = db.session.query(Post).filter_by(user_id=session['user_id'], category="extracurriculars").all()
+        return render_template('extracurriculars_posts.html', posts=my_posts, user=session['user'])
+    else:
+        return redirect(url_for('login'))
+
+
+@app.route('/posts/categories/admissions')
+def get_admissions():
+    #retrieve user from db
+    if session.get('user'):
+        my_posts = db.session.query(Post).filter_by(user_id=session['user_id']).all()
+        return render_template('admissions_posts.html', posts=my_posts, user=session['user'])
+    else:
+        return redirect(url_for('login'))
+
 app.run(host=os.getenv('IP', '127.0.0.1'),port=int(os.getenv('PORT', 5000)),debug=True)
 
 # To see the web page in your web browser, go to the url,

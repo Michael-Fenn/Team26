@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="UNCC Forum">
+    <title>UNCC Posts App - View your Posts</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+</head>
+
+<body>
+    <h1>
+        <a href="{{ url_for('index') }}">
+            <img src="{{ url_for('static', filename='49erforum.png') }}" alt="49er forum logo" width="100px"
+                height="62px">
+        </a>
+    </h1>
+    <nav id='navbar'>
+        <nav>
+            <a href="{{url_for('index')}}"> Home</a>
+            <a href="{{url_for('get_posts')}}">Posts</a>
+            <a href="{{url_for('new_post')}}">Add Post</a>
+        </nav>
+        {% if user %}
+        <nav>
+            <a href="{{url_for('logout')}}">Logout</a>
+        </nav>
+        {% else %}
+        <nav>
+            <a href="{{ url_for('login')}}">Sign In</a>
+            <a href="{{ url_for('register')}}">Register</a>
+        </nav>
+        {% endif %}
+    </nav>
+    <h2>A Forum For All of Your UNCC Needs.</h2>
+
+
+    <div  class = 'Category_majors'>
+
+        Majors
+    </div>
+
+    <div  class = 'Category_classes'>
+
+        Classes
+
+    </div>
+
+    <div  class = 'Category_food'>
+
+        Food
+
+    </div>
+
+    <div  class = 'Category_extracurriculars'>
+
+        Extracurriculars
+
+    </div>
+
+    <div  class = 'Category_admissions'>
+        Admissions
+
+    </div>
+
+    </body>
+</html>

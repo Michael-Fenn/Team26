@@ -21,6 +21,11 @@
         <nav>
             <a href="{{url_for('index')}}"> Home</a>
             <a href="{{url_for('get_posts')}}">Posts</a>
+            <a href="{{url_for('get_major_posts')}}">Majors</a>
+            <a href="{{url_for('get_classes')}}">Classes</a>
+            <a href="{{url_for('get_food')}}">Food</a>
+            <a href="{{url_for('get_extracurriculars')}}">Extracurriculars</a>
+            <a href="{{url_for('get_admissions')}}">Admissions</a>
             <a href="{{url_for('new_post')}}">Add Post</a>
         </nav>
         {% if user %}

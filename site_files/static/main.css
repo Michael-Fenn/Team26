@@ -38,6 +38,24 @@ nav nav a:hover{
     background-color: green;
     color: white;
 }
+#categories{
+    background-color: grey;
+    overflow: hidden;
+    padding: none;
+    margin: none;
+ }
+ #categories a{
+    display: inline-block;
+    background: grey;
+    padding: 8px;
+    float: left;
+    text-decoration: none;
+    color: white;
+ }
+ #categories a:hover{
+    background-color: green;
+    color: white;
+ }
 textarea{
     resize: none;
 
@@ -63,4 +81,23 @@ html, body {
      margin-right: auto;
      height: 25%;
      width: 100%;
+ }
+ nav #categories{
+    display: inline;
+    background: grey;
+    padding: none;
+    text-decoration: none;
+    color: white;;
+ }
+ #categories a{
+    display: inline-block;
+    background: grey;
+    padding: 8px;
+    float: left;
+    text-decoration: none;
+    color: white;
+ }
+ #categories a:hover{
+    background-color: green;
+    color: white;
  }

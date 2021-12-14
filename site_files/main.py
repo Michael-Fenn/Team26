@@ -196,7 +196,7 @@ def new_comment(post_id):
 def get_major_posts():
     #retrieve user from db
     if session.get('user'):
-        my_posts = db.session.query(Post).filter_by(user_id=session['user_id'], category="majors").all()
+        my_posts = db.session.query(Post).filter_by(user_id=session['user_id'], category="major_posts").all()
         return render_template('majors_posts.html', posts=my_posts, user=session['user'])
     else:
         return redirect(url_for('login'))
@@ -205,7 +205,7 @@ def get_major_posts():
 def get_classes():
     #retrieve user from db
     if session.get('user'):
-        my_posts = db.session.query(Post).filter_by(user_id=session['user_id'], category="classes").all()
+        my_posts = db.session.query(Post).filter_by(user_id=session['user_id'], category="classes_posts").all()
         return render_template('classes_posts.html', posts=my_posts, user=session['user'])
     else:
         return redirect(url_for('login'))
@@ -215,7 +215,7 @@ def get_classes():
 def get_food():
     #retrieve user from db
     if session.get('user'):
-        my_posts = db.session.query(Post).filter_by(user_id=session['user_id'], category="food").all()
+        my_posts = db.session.query(Post).filter_by(user_id=session['user_id'], category="food_posts").all()
         return render_template('food_posts.html', posts=my_posts, user=session['user'])
     else:
         return redirect(url_for('login'))
@@ -224,7 +224,7 @@ def get_food():
 def get_extracurriculars():
     #retrieve user from db
     if session.get('user'):
-        my_posts = db.session.query(Post).filter_by(user_id=session['user_id'], category="extracurriculars").all()
+        my_posts = db.session.query(Post).filter_by(user_id=session['user_id'], category="extracurriculars_posts").all()
         return render_template('extracurriculars_posts.html', posts=my_posts, user=session['user'])
     else:
         return redirect(url_for('login'))
@@ -234,7 +234,7 @@ def get_extracurriculars():
 def get_admissions():
     #retrieve user from db
     if session.get('user'):
-        my_posts = db.session.query(Post).filter_by(user_id=session['user_id']).all()
+        my_posts = db.session.query(Post).filter_by(user_id=session['user_id'], category="admissions_posts").all()
         return render_template('admissions_posts.html', posts=my_posts, user=session['user'])
     else:
         return redirect(url_for('login'))

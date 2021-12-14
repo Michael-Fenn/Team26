@@ -45,5 +45,36 @@
         <a href="{{url_for('get_major_posts')}}">Majors</a>
     </nav>
 
+    <table>
+        <tr>
+            <th>Title</th>
+            <th>Date</th>
+            <th>Image</th>
+        </tr>
+        {% for post in posts %}
+        <tr>
+            <td><a href="{{ url_for('get_post', post_id=post.id) }}">{{ post.title }}</a></td>
+            <td>{{ post.date }}</td>
+            {% if post.image %}
+                <td><img src="data:image/png;base64, {{ post.image.decode('utf-8') }}" width="100" height="auto"></td>
+            {% else %}
+                <td style="width:100px"></td>
+            {%endif%}
+
+            <td>
+                <form action="{{url_for('update_post', post_id=post.id)}}">
+                    <input type="submit" value="Edit">
+                </form>
+                <form action="{{ url_for('delete_post', post_id=post.id) }}" method="POST">
+                    <input type="submit" value='Delete'>
+                </form>
+                <form action="{{  url_for('pin_post', post_id=post.id) }}" method="POST">
+                    <input type="submit" value="Pin Post">
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+
     </body>
 </html>

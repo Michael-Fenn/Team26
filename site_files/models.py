@@ -36,6 +36,7 @@ class User(db.Model):
     registered_on = db.Column(db.DateTime, nullable=False)
     posts = db.relationship("Post", backref="user", lazy=True)
     comments = db.relationship("Comment", backref="user", lazy=True)
+    is_Admin = db.relationship("Admin", nullable=False, lazy= True)
 
     def __init__(self, first_name, last_name, email, password):
         self.first_name = first_name
@@ -43,3 +44,4 @@ class User(db.Model):
         self.email = email
         self.password = password
         self.registered_on = datetime.date.today()
+user_role = db.Column(db.string(20), nullable=False)

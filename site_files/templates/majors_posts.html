@@ -37,33 +37,13 @@
     <h2>A Forum For All of Your UNCC Needs.</h2>
 
 
-    <div  class = 'Category_majors'>
-
-        Majors
-    </div>
-
-    <div  class = 'Category_classes'>
-
-        Classes
-
-    </div>
-
-    <div  class = 'Category_food'>
-
-        Food
-
-    </div>
-
-    <div  class = 'Category_extracurriculars'>
-
-        Extracurriculars
-
-    </div>
-
-    <div  class = 'Category_admissions'>
-        Admissions
-
-    </div>
+    <nav id="categories">
+        <a href="{{url_for('get_admissions')}}">Admissions</a>
+        <a href="{{url_for('get_classes')}}">Classes</a>
+        <a href="{{url_for('get_extracurriculars')}}">Extracurriculars</a>
+        <a href="{{url_for('get_food')}}">Food</a>
+        <a href="{{url_for('get_major_posts')}}">Majors</a>
+    </nav>
 
     </body>
 </html>
